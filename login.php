@@ -1,11 +1,14 @@
 <?php
 
-session_start();
-
-$_SESSION;
-
 include("dbconnection.php");
 include("functions.php");
+
+
+session_start();
+
+// $_SESSION;
+
+
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
     $username = $_POST['username'];
@@ -32,7 +35,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
            $_SESSION['user_id'] = $user_data['username'];
            die;
         }else{
-            echo "Incorrect username orrrrr password";
+            echo "Incorrect username or password";
         }
 
         
@@ -54,11 +57,25 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <link rel="stylesheet" href="Styles/signup.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Login LeaseMaster</title>
+    <style>
+        .LMLogo{
+            display: flex;
+            justify-content: center;
+            
+        }
+        #LMLogoImg{
+            width: 200px;
+        }
+    </style>
 </head>
 <body>
 
  
 <div id="signupDiv">
+    <div class="LMLogo">
+    <img id="LMLogoImg" src="Images/LeaseMasterLogo.png.png" alt="">
+    </div>
+    
 <div>
     <h1 id="loginPageHeader">LOGIN TO LEASEMASTER</h1>
  </div>

@@ -1,3 +1,13 @@
+<?php
+
+session_start();
+include("dbconnection.php");
+include("functions.php");
+
+//$user_data = check_login($conn);
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -25,6 +35,10 @@
     #kemuHeader{
         width: 10%;
     }
+    .navMainContainer{
+      display: flex;
+      justify-content: space-between;
+    }
     
   
 </style>
@@ -38,13 +52,14 @@
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <div class="collapse navbar-collapse navCustom" id="navbarNavAltMarkup">
+    <div class="navMainContainer collapse navbar-collapse navCustom" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-link active" aria-current="page" href="index.php">Home</a>
-        <a class="nav-link active" href="register.php">Registration</a>
-        <a class="nav-link active" href="registrationList.php">Tenants</a>
-        
-        
+        <a class="nav-link active" aria-current="page" href="home.php">Home</a>
+        <a class="nav-link active" href="tenantRegistration.php">Registration</a>
+        <a class="nav-link active" href="tenantServices.php">Tenant Services</a>
+      </div>
+      <div class="navbar-nav">
+      <a class="nav-link active" href="login.php">Logout <?php echo $_SESSION['user_id'] ?></a>
       </div>
     </div>
   </div>
