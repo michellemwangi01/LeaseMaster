@@ -1,0 +1,33 @@
+body{
+    background-color: black ;
+    color: coral;
+}
+#signupDiv{
+    max-width: 80rem;
+    width: 60%;
+    margin: auto;
+    margin-top: 80px ;
+    border: 2px solid coral;
+    padding: 10px;
+    border-radius: 10px;
+}
+#submitSignup{
+    background-color: coral;
+    color: white;
+    text-align: center;
+    
+}
+#loginPageHeader{
+    text-align: center;
+    color: coral;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    margin-top: 10px;
+}
+form{
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+#buttonDiv{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
