@@ -6,7 +6,7 @@ include("functions.php");
 
 session_start();
 
-// $_SESSION;
+$_SESSION;
 
 
 
@@ -31,8 +31,9 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         }
         if( $user_data['password'] === $password){
            echo 'Login Successful!';
-           header("Location: home.php");
+          header("Location: home.php");
            $_SESSION['user_id'] = $user_data['username'];
+           //echo $_SESSION['user_id'];
            die;
         }else{
             echo "Incorrect username or password";

@@ -1,11 +1,7 @@
 <?php
 
 
-$_SESSION;
-include("dbconnection.php");
-include("functions.php");
-
-$user_data = check_login($conn);
+//$user_data = check_login($conn);
 
 $errors = array("fullName" => '', "phoneNumber" => '', "email" => '', "courseName" => '', "regID" => '', "regDate" => '' );
 $fullNames = $phoneNumber = $email = $courseName = $regID = $regDate = '';
