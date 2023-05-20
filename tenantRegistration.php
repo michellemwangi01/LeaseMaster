@@ -11,7 +11,7 @@ $houseType = $houseNumber = $bankName = $bankBranch = $bankAcctNumber =  '';
 //--------------------------FORM VALIDATION-------------------
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
-    //echo print_r($_POST);
+    echo print_r($_POST);
 
 
         //check first name

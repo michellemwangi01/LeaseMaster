@@ -53,8 +53,9 @@ include("session.php");
     <div class="navMainContainer collapse navbar-collapse navCustom" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="home.php">Home</a>
-        <a class="nav-link active" href="tenantRegistration.php">Registration</a>
+        <a class="nav-link active" href="tenantRegistration.php">Application</a>
         <a class="nav-link active" href="tenantServices.php">Tenant Services</a>
+        <a class="nav-link active" href="tenants.php">Tenants</a>
       </div>
       <div class="navbar-nav">
       <a class="nav-link active" href="login.php">Logout <?php echo $_SESSION['user_id'] ?></a>
