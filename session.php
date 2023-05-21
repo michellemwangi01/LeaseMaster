@@ -1,7 +1,9 @@
 <?php
-session_start();
-include("dbconnection.php");
-include("functions.php");
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+
 
 //check_login($conn);
 

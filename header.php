@@ -1,7 +1,11 @@
 <?php
 
-include("session.php");
-//$user_data = check_login($conn);
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+include("dbconnection.php");
+include("functions.php");
 
 ?>
 

@@ -58,6 +58,11 @@
     border-radius: 12px;
     text-align: center;
 }
+.formServiceRequests{
+  width: 70%;
+  margin: 3rem;
+
+}
 .mybtn{
     color: white;
     border-radius: 20px;

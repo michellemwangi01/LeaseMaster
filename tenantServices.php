@@ -64,7 +64,7 @@ include("header.php");
             $text = $image['text'];
             echo '<div class="grid-item">';
             echo '<p>' . $text . '</p>';
-            echo '<a href="' . $imageUrl . '"><img src="Images/' . $imageUrl . '" alt="' . $text . '"></a>';
+            echo '<a href="serviceRequests.php"><img src="Images/' . $imageUrl . '" alt="' . $text . '"></a>';
             
             echo '</div>';
         }

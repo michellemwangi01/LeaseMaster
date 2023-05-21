@@ -21,4 +21,3 @@ function check_login($conn){//funtion to check if user is logged in to the syste
    die;
 }
 
-?>
