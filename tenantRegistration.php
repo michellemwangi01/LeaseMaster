@@ -1,6 +1,13 @@
 <?php
-include('header.php');
-include('dbconnection.php');
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+include("functions.php");
+
+include("dbconnection.php");
+check_login($conn);
+$username = $_SESSION['user_id'];
 
 $errors = array("firstName" => '',"lastName" => '', "phoneNumber" => '', "email" => '', "identification" => '', "identificationNo" => '', "DoB" => '',"kinFullNames" => '',"kinRelationship" => '',"kinMobile" => '',"prevAddress" => '',"prevAddressContact" => '',"lengthofStay" => '',"reasonForLeaving" => '',
 "employerName" => '',"jobTitle" => '',"employerMobile" => '',"employerEmail" => '', "houseType" => '',"houseNumber" => '',"bankName" => '', "bankBranch" => '',"bankAcctNumber" => '' );
@@ -280,12 +287,12 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
 
             $sqlquery = "INSERT INTO `clientapplications`(`FirstName`, `LastName`, `Mobile`, 
             `email`, `identification`, `identificationNo`, `DateofBirth`, `prevAddress`, `prevAddressContact`, `lengthofStay`, `reasonForLeaving`, `employerName`, `jobTitle`, `employerMobile`, `employerEmail`, `houseType`, `houseNumber`, `bankName`, 
-            `bankBranch`, `bankAcctNumber`) 
+            `bankBranch`, `bankAcctNumber`, `username`) 
             VALUES (
             '$firstName','$lastName', $phoneNumber, 
             '$email','$identification', '$identificationNo',
             $DoB,'$prevAddress', '$prevAddressContact',    $lengthofStay, '$reasonForLeaving', '$employerName', 
-            '$jobTitle', '$employerMobile', '$employerEmail', '$houseType', '$houseNumber', '$bankName', '$bankBranch', '$bankAcctNumber' )";
+            '$jobTitle', '$employerMobile', '$employerEmail', '$houseType', '$houseNumber', '$bankName', '$bankBranch', '$bankAcctNumber', '$username' )";
 
             mysqli_query($conn, $sqlquery);
             echo "Data inserted successfully!";

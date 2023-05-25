@@ -15,6 +15,38 @@ $username = $_SESSION['user_id'];
 //echo $username;
 $errors = array("contactName" => '',"phoneNumber" => '', "houseNumber" => '', "service" => '', "serviceIssue" => '', "description" => '', "requestDate" => '' );
 $contactName = $phoneNumber =$houseNumber = $service = $serviceIssue = $description = $requestDate = '';
+
+$sqlSelectQuery = "SELECT * FROM clientapplications WHERE username = '{$username}'";
+$result = mysqli_query($conn, $sqlSelectQuery);
+$tenantRecord = mysqli_fetch_assoc($result);
+//print_r($tenantRecord);
+
+$contactName = mysqli_real_escape_string($conn, $tenantRecord['FirstName']);
+$phoneNumber = mysqli_real_escape_string($conn, $tenantRecord['Mobile']);
+$houseNumber = mysqli_real_escape_string($conn, $tenantRecord['houseNumber']);
+
+
+if(isset($_GET)){
+    $service = $_GET['service'];
+
+    $sqlServiceIssuesQuery = "SELECT si.serviceissuename
+        FROM lm_serviceissues si
+        JOIN lm_services s ON si.serviceid = s.serviceid
+        WHERE s.servicename = '{$service}';" ;
+
+
+        $result = mysqli_query($conn, $sqlServiceIssuesQuery);
+        //echo print_r($result);
+
+        // $serviceIssues = mysqli_fetch_assoc($result);
+        // echo print_r($serviceIssue);
+
+       
+        
+}
+
+
+
 //--------------------------FORM VALIDATION-------------------
 if(isset($_POST['submit'])){
          
@@ -121,6 +153,9 @@ if(isset($_POST['submit'])){
        
         header('Location: home.php');
 
+        
+
+
 
     }
  } //End of POST check
@@ -165,7 +200,7 @@ if(isset($_POST['submit'])){
 
 <section class="formServiceRequests">
     <h4>New Service Request</h4>
-    <form class="registrationForm" action="serviceRequests.php" method="POST">
+    <form class="registrationForm" action="serviceRequests.php?service=<?php echo htmlspecialchars($service)?>" method="POST">
     <div class="">
         <span class="" id="">Contact Name</span>
         <input value = '<?php echo htmlspecialchars($contactName) ?>' type="text" name="contactName"class="myformControl" aria-label="Sizing example input" aria-describedby="">
@@ -190,8 +225,22 @@ if(isset($_POST['submit'])){
         <span><p class='errorMessages'><?php echo $errors['service'] ?></p></span>
     </div>
     <div class="">
-        <span class="" id="">Service Issue</span>
-        <input value = '<?php echo htmlspecialchars($serviceIssue) ?>' type="text" name="serviceIssue" class="myformControl" aria-label="Sizing example input" aria-describedby="">
+        <span class="" id="">Service Issue </span>
+        <select class="myformselect" aria-label="Default select example" name="serviceIssue">
+            <optgroup>
+            <option selected>Select</option>
+                <?php
+                    if($result){
+                        while($row =mysqli_fetch_assoc($result) ){
+                            echo '<option value="Studio">'. $row['serviceissuename'].'</option>';
+                        }
+                    }
+                    ?>
+            </optgroup>
+           
+            
+
+        </select>
         <span><p class='errorMessages'><?php echo $errors['serviceIssue'] ?></p></span>
     </div>
     <div class="">
@@ -205,7 +254,7 @@ if(isset($_POST['submit'])){
         <span><p class='errorMessages'><?php echo $errors['requestDate'] ?></p></span>
     </div>
     <div>
-        <button class="mybtn" type="Submit" name="submit" value="submit">Register</button>
+        <button class="mybtn" type="Submit" name="submit" value="submit">Submit</button>
     </div>
     </form>
 

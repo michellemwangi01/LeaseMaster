@@ -1,6 +1,14 @@
 <?php 
-
+require_once 'functions.php';
 include("dbconnection.php");
+
+check_login($conn);
+
+if(!isset($_SESSION)) 
+{ 
+    session_start(); 
+} 
+
 
 $sqlquery = "SELECT * FROM clientapplications order by clientID desc";
 $results = mysqli_query($conn, $sqlquery);

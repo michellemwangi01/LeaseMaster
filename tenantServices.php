@@ -1,5 +1,7 @@
 <?php
 include("header.php");
+
+
 ?> 
 
 
@@ -48,13 +50,13 @@ include("header.php");
         $images = array(
             array('image_url' => 'maintenance.png', 'text' => 'Maintenance and Repairs'),
             array('image_url' => 'security.png', 'text' => 'Property Security'),
-            array('image_url' => 'amenities.png', 'text' => 'Amenities'),
+            array('image_url' => 'amenities.png', 'text' => 'Property Amenities'),
             array('image_url' => 'utilities.png', 'text' => 'Utility Management'),
             array('image_url' => 'wifi.png', 'text' => 'High-Speed Internet and Cable'),
             array('image_url' => 'parking.png', 'text' => 'On-Site Parking'),
             array('image_url' => 'events.png', 'text' => 'Community Events'),
             array('image_url' => 'delivery.png', 'text' => 'Package Delivery Solutions'),
-            array('image_url' => 'rent.png', 'text' => 'Flexible Lease Terms: '),
+            array('image_url' => 'rent.png', 'text' => 'Flexible Lease Terms '),
             array('image_url' => 'portal.png', 'text' => 'Online Tenant Portals')
             
         );
@@ -64,8 +66,9 @@ include("header.php");
             $text = $image['text'];
             echo '<div class="grid-item">';
             echo '<p>' . $text . '</p>';
-            echo '<a href="serviceRequests.php"><img src="Images/' . $imageUrl . '" alt="' . $text . '"></a>';
-            
+            echo '<a href="serviceRequests.php?service=' .htmlspecialchars($text).'"><img src="Images/' . $imageUrl . '" alt="' . $text . '"></a>';
+           
+           
             echo '</div>';
         }
         ?>
@@ -74,6 +77,9 @@ include("header.php");
     <?php
     include("footer.php");
     ?> 
+    <script>
+        
+    </script>
 </body>
 </html>
 
