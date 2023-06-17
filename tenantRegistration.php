@@ -285,14 +285,23 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         try{
             mysqli_report(MYSQLI_REPORT_ERROR);
 
-            $sqlquery = "INSERT INTO `clientapplications`(`FirstName`, `LastName`, `Mobile`, 
-            `email`, `identification`, `identificationNo`, `DateofBirth`, `prevAddress`, `prevAddressContact`, `lengthofStay`, `reasonForLeaving`, `employerName`, `jobTitle`, `employerMobile`, `employerEmail`, `houseType`, `houseNumber`, `bankName`, 
+            $sqlquery = "INSERT INTO `LM_TenantRegistrations`(`firstName`, `lastName`, `phoneNumber`, 
+            `email`, `identification`, `identificationNo`, 
+            `DateofBirth`, `kinFullNames`,`kinRelationship`,
+            `kinMobile`,`prevAddress`, `prevAddressContact`, 
+            `lengthofStay`, `reasonForLeaving`, `employerName`, 
+            `jobTitle`, `employerMobile`, `employerEmail`, 
+            `houseType`, `houseNumber`, `bankName`, 
             `bankBranch`, `bankAcctNumber`, `username`) 
             VALUES (
-            '$firstName','$lastName', $phoneNumber, 
+            '$firstName','$lastName', '$phoneNumber', 
             '$email','$identification', '$identificationNo',
-            $DoB,'$prevAddress', '$prevAddressContact',    $lengthofStay, '$reasonForLeaving', '$employerName', 
-            '$jobTitle', '$employerMobile', '$employerEmail', '$houseType', '$houseNumber', '$bankName', '$bankBranch', '$bankAcctNumber', '$username' )";
+            '$DoB', '$kinFullNames','$kinRelationship','$kinMobile',
+            '$prevAddress', '$prevAddressContact', $lengthofStay, 
+            '$reasonForLeaving', '$employerName', '$jobTitle', 
+            '$employerMobile', '$employerEmail', '$houseType', 
+            '$houseNumber', '$bankName', '$bankBranch', 
+            $bankAcctNumber, '$username' )";
 
             mysqli_query($conn, $sqlquery);
             echo "Data inserted successfully!";

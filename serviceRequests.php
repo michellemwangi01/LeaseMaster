@@ -16,30 +16,32 @@ $username = $_SESSION['user_id'];
 $errors = array("contactName" => '',"phoneNumber" => '', "houseNumber" => '', "service" => '', "serviceIssue" => '', "description" => '', "requestDate" => '' );
 $contactName = $phoneNumber =$houseNumber = $service = $serviceIssue = $description = $requestDate = '';
 
-$sqlSelectQuery = "SELECT * FROM clientapplications WHERE username = '{$username}'";
+$sqlSelectQuery = "SELECT * FROM LM_TenantRegistrations WHERE username = '{$username}'";
 $result = mysqli_query($conn, $sqlSelectQuery);
 $tenantRecord = mysqli_fetch_assoc($result);
 //print_r($tenantRecord);
 
-$contactName = mysqli_real_escape_string($conn, $tenantRecord['FirstName']);
-$phoneNumber = mysqli_real_escape_string($conn, $tenantRecord['Mobile']);
+
+
+
+$contactName = mysqli_real_escape_string($conn, $tenantRecord['firstName']. " " . $tenantRecord['lastName']);
+$phoneNumber = mysqli_real_escape_string($conn, $tenantRecord['phoneNumber']);
 $houseNumber = mysqli_real_escape_string($conn, $tenantRecord['houseNumber']);
 
 
 if(isset($_GET)){
     $service = $_GET['service'];
 
-    $sqlServiceIssuesQuery = "SELECT si.serviceissuename
-        FROM lm_serviceissues si
-        JOIN lm_services s ON si.serviceid = s.serviceid
-        WHERE s.servicename = '{$service}';" ;
+    $sqlServiceIssuesQuery = "SELECT si.serviceIssueName
+        FROM LM_ServiceIssues si
+        JOIN LM_Services s ON si.serviceID = s.serviceID
+        WHERE s.serviceName = '{$service}';" ;
 
 
         $result = mysqli_query($conn, $sqlServiceIssuesQuery);
-        //echo print_r($result);
+        echo print_r($result);
 
-        // $serviceIssues = mysqli_fetch_assoc($result);
-        // echo print_r($serviceIssue);
+ 
 
        
         
@@ -52,8 +54,6 @@ if(isset($_POST['submit'])){
          
        echo print_r($_POST);
        
-
-
         //check contactName
         $contactName = $_POST['contactName'];
         if(empty($contactName)){
@@ -129,7 +129,7 @@ if(isset($_POST['submit'])){
 
 
         
-        $sqlqueryuserID = "SELECT userID FROM users where username = '$username'";
+        $sqlqueryuserID = "SELECT userID FROM LM_Users where username = '$username'";
         $result = mysqli_fetch_assoc(mysqli_query($conn, $sqlqueryuserID));
         echo print_r($result['userID']);
         $userID = $result['userID'];
@@ -138,8 +138,8 @@ if(isset($_POST['submit'])){
         $formattedDate = date('Y-m-d', strtotime($requestDate));
 
         //write sql query to insert values into sql table
-        $sqlquery = "INSERT INTO `servicerequests`
-                (`clientID`, `ContactName`, `mobileNumber`, `houseNumber`, `category`, `subCategory`, `description`, `occurenceDate`) 
+        $sqlquery = "INSERT INTO `LM_ServiceRequests`
+                (`userId`, `contactName`, `mobileNumber`, `houseNumber`, `Service`, `serviceIssue`, `description`, `occurencedate`) 
         VALUES ($userID,'$contactName',' $phoneNumber','$houseNumber','$service','$serviceIssue',' $description','$formattedDate');";
         
         
@@ -230,9 +230,9 @@ if(isset($_POST['submit'])){
             <optgroup>
             <option selected>Select</option>
                 <?php
-                    if($result){
+                    if($result){//because the result retrieved from SQL is of num_nows > 1, we have to loop through, echoing the value of each row
                         while($row =mysqli_fetch_assoc($result) ){
-                            echo '<option value="Studio">'. $row['serviceissuename'].'</option>';
+                            echo '<option value="Studio">'. $row['serviceIssueName'].'</option>';
                         }
                     }
                     ?>

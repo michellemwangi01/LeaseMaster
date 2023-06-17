@@ -19,7 +19,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         //check that the user name is in the database
         //then check that the password matches that username
         
-        $query = "SELECT * FROM  users WHERE username = '$username' limit 1 ";
+        $query = "SELECT * FROM  LM_Users WHERE username = '$username' limit 1 ";
        
         //store the reuslts in a variable and convert the result into associative array
         $result = mysqli_query($conn, $query);

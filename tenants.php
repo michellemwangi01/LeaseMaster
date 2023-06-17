@@ -10,7 +10,7 @@ if(!isset($_SESSION))
 } 
 
 
-$sqlquery = "SELECT * FROM clientapplications order by clientID desc";
+$sqlquery = "SELECT * FROM LM_TenantRegistrations order by clientID desc";
 $results = mysqli_query($conn, $sqlquery);
 $tenants = mysqli_fetch_all($results, MYSQLI_ASSOC);
 //PRINT_R( $tenants);//print out our Aarray version of the result
@@ -36,7 +36,7 @@ if(isset($_POST['delete'])){
     $recordtoDelete = mysqli_real_escape_string($conn, $_POST['recordtoDelete']);
     //echo $recordtoDelete;
     
-    $sqldeleteQuery = "DELETE FROM clientapplications where clientID = '{$recordtoDelete}'";
+    $sqldeleteQuery = "DELETE FROM LM_TenantRegistrations where clientID = '{$recordtoDelete}'";
     
     if(mysqli_query($conn, $sqldeleteQuery)){
         //sucessful delete

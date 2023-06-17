@@ -13,7 +13,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     $passwordDuplicate = $_POST['passwordDuplicate'];
 
 
-    $queryCheckUsername = "SELECT * FROM users where username = '$username'";
+    $queryCheckUsername = "SELECT * FROM LM_Users where username = '$username'";
     $usernameCheckResult = mysqli_query($conn, $queryCheckUsername);
     $checkResult = mysqli_fetch_assoc($usernameCheckResult);
     //echo print_r($checkResult);
@@ -25,7 +25,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         else if(!empty($username) && !empty($password) && !empty($passwordDuplicate) && $password === $passwordDuplicate ){
              //save information to database
              echo ($username);
-             $queryInsert = "INSERT INTO users (username, password) 
+             $queryInsert = "INSERT INTO `LM_Users` (`username`, `password`) 
              VALUES ('$username','$password')";
             
              mysqli_query($conn, $queryInsert);

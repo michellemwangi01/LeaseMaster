@@ -5,7 +5,7 @@ function check_login($conn){//funtion to check if user is logged in to the syste
     echo $_SESSION['user_id'];
     $username = $_SESSION['user_id'];//store the id in the session global variable in the variable 'id'
 
-    $query = "SELECT username FROM users WHERE username = '$username' limit 1"; //if the session variable[user_id] is set, check that the value exists in the database
+    $query = "SELECT username FROM LM_Users WHERE username = '$username' limit 1"; //if the session variable[user_id] is set, check that the value exists in the database
 
     $result = mysqli_query($conn, $query); //pass the query to the connection
 
