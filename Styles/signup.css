@@ -1,12 +1,18 @@
 body{
-    background-color: black ;
-    color: coral;
+    height: 90vh;
+    background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("./Images/HouseBackground.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+.form-label{
+    color: white;
 }
 #signupDiv{
+    margin-top: 10rem;
     max-width: 60rem;
     width: 50%;
     margin: auto;
-    margin-top: 80px ;
     border: 2px solid coral;
     padding: 10px;
     border-radius: 10px;

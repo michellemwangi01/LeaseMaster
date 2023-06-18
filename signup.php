@@ -5,6 +5,7 @@ session_start();
 include("dbconnection.php");
 include("functions.php");
 
+$errors = array("username" => '',"password" => '',);
 
 
 if($_SERVER['REQUEST_METHOD'] == "POST"){
@@ -20,7 +21,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
     if (!mysqli_num_rows($usernameCheckResult) > 0){
         if($password !== $passwordDuplicate){
-            echo "Passwords do not match";
+            $errors['password'] = "*Passwords do not match";
         }
         else if(!empty($username) && !empty($password) && !empty($passwordDuplicate) && $password === $passwordDuplicate ){
              //save information to database
@@ -36,7 +37,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         }
     }
     else{
-        echo 'Username exists, enter a different username';
+      $errors['username'] = 'Username exists, enter a different username';
     }   
     
 
@@ -56,7 +57,29 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
     <link rel="stylesheet" href="Styles/signup.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
     <title>Signup LeaseMaster</title>
-</head>
+  <style>
+    #signupDiv{
+        margin-top: 10rem;
+    }
+    #LMLogoImg{
+        width: 200px;
+    }
+    body{
+        height: 90vh;
+        background-image: linear-gradient(rgba(0,0,0,0.55), rgba(0,0,0,0.55)), url("./Images/HouseBackground.jpg");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+    .form-label{
+        color: white;
+    }
+    .errorMessages{
+            color: red;
+            margin-left: 5px;
+        }
+  </style>
+  </head>
 <body>
 <div id="signupDiv">
 <div>
@@ -66,7 +89,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   <div class="mb-3">
     <label for="exampleInputEmail1" class="form-label">Username</label>
     <input  name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-    <!-- <span><p class='errorMessages'><?php echo $errors['fullName'] ?></p></span> -->
+    <span><p class='errorMessages'><?php echo $errors['username'] ?></p></span>
   </div>
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -75,6 +98,7 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
   <div class="mb-3">
     <label for="exampleInputPassword1" class="form-label">Re-type Password</label>
     <input  name="passwordDuplicate" type="password" class="form-control" id="exampleInputPassword1">
+    <span><p class='errorMessages'><?php echo $errors['password'] ?></p></span>
   </div>
   <button id="submitSignup" type="submit" class="btn">Sign Up</button>
 </form>

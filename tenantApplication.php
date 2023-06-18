@@ -1,11 +1,7 @@
 <?php
-if(!isset($_SESSION)) 
-{ 
-    session_start(); 
-} 
-include("functions.php");
 
-include("dbconnection.php");
+include("header.php");
+
 check_login($conn);
 $username = $_SESSION['user_id'];
 
@@ -19,8 +15,6 @@ $houseType = $houseNumber = $bankName = $bankBranch = $bankAcctNumber =  '';
 if($_SERVER["REQUEST_METHOD"] == "POST"){
 
     echo print_r($_POST);
-
-
         //check first name
         $firstName = $_POST['firstName'];
         if(empty($firstName)){
@@ -285,7 +279,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
         try{
             mysqli_report(MYSQLI_REPORT_ERROR);
 
-            $sqlquery = "INSERT INTO `LM_TenantRegistrations`(`firstName`, `lastName`, `phoneNumber`, 
+            $sqlquery = "INSERT INTO `LM_tenantApplications`(`firstName`, `lastName`, `phoneNumber`, 
             `email`, `identification`, `identificationNo`, 
             `DateofBirth`, `kinFullNames`,`kinRelationship`,
             `kinMobile`,`prevAddress`, `prevAddressContact`, 
@@ -330,6 +324,8 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
     <title>Registration LeaseMaster</title>
 </head>
 <body>
+
+
     <div class="mainApplicationDiv">
         <div class="TnCs">
             <h2>NEW TENANT APPLICATION</h2>
@@ -345,7 +341,7 @@ if($_SERVER["REQUEST_METHOD"] == "POST"){
             </p>
         </div>
         <div id="formsContainer">
-            <form class="" action="tenantRegistration.php" method="POST">
+            <form class="" action="tenantApplication.php" method="POST">
                 <fieldset id="personalInfo" class="scheduler-border">
                 <legend class="scheduler-border">Personal Information</legend>
                 <div class="row g-3">            

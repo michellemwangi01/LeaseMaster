@@ -7,6 +7,9 @@ include("functions.php");
 session_start();
 
 $_SESSION;
+$_SESSION['user_id'] = '';
+echo $_SESSION['user_id'];
+$errors = array("password" => '');
 
 
 
@@ -31,17 +34,18 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
         }
         if( $user_data['password'] === $password){
            echo 'Login Successful!';
-          header("Location: home.php");
+            header("Location: home.php");
            $_SESSION['user_id'] = $user_data['username'];
            //echo $_SESSION['user_id'];
            die;
         }else{
+            $errors['password'] = '*Username & password do not match'; 
             echo "Incorrect username or password";
         }
 
         
     }else{
-        echo "Incorrect username or password";
+        $errors['password'] = '*Please enter your username & password to Login';
     }
 }
 
@@ -51,55 +55,74 @@ if($_SERVER['REQUEST_METHOD'] == "POST"){
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="Styles/signup.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
-    <title>Login LeaseMaster</title>
-    <style>
-        .LMLogo{
-            display: flex;
-            justify-content: center;
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="stylesheet" href="Styles/signup.css">
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+        <title>Login LeaseMaster</title>
+        <style>
+            .LMLogo{
+                display: flex;
+                justify-content: center;
+                
+            }
+            #signupDiv{
+                margin-top: 10rem;
+            }
+            #LMLogoImg{
+                width: 200px;
+            }
+            body{
+                height: 90vh;
+                background-image: linear-gradient(rgba(0,0,0,0.65), rgba(0,0,0,0.65)), url("./Images/HouseBackground.jpg");
+                background-size: cover;
+                background-position: center;
+                background-repeat: no-repeat;
+            }
+            .form-label{
+                color: white;
+            }
+            .errorMessages{
+                color: red;
+                margin-left: 5px;
+            }
+            #clicktoSignup{
+                color: white;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="signupDiv">
+            <div class="LMLogo">
+            <img id="LMLogoImg" src="Images/LeaseMasterLogo.png.png" alt="">
+            </div>
             
-        }
-        #LMLogoImg{
-            width: 200px;
-        }
-    </style>
-</head>
-<body>
-
- 
-<div id="signupDiv">
-    <div class="LMLogo">
-    <img id="LMLogoImg" src="Images/LeaseMasterLogo.png.png" alt="">
-    </div>
-    
-<div>
-    <h1 id="loginPageHeader">LOGIN TO LEASEMASTER</h1>
- </div>
-<form method="POST">
-  <div class="mb-3">
-    <label for="exampleInputEmail1" class="form-label">Username</label>
-    <input  name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
-  </div>
-  <div class="mb-3">
-    <label for="exampleInputPassword1" class="form-label">Password</label>
-    <input  name="password" type="password" class="form-control" id="exampleInputPassword1">
-  </div>
-  <div id="buttonDiv">
-  <button id="submitSignup" type="submit" class="btn">Login</button>
-  <a href="./signup.php"> Don't have an account? </a>
-  </div>
-  
-</form>
-</div>
+        <div>
+            <h1 id="loginPageHeader">LOGIN TO LEASEMASTER</h1>
+        </div>
+        <form method="POST">
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Username</label>
+            <input  name="username" type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Password</label>
+            <input  name="password" type="password" class="form-control" id="exampleInputPassword1">
+            <span><p class='errorMessages'><?php echo $errors['password'] ?></p></span>
+        </div>
+        <div id="buttonDiv">
+        <button id="submitSignup" type="submit" class="btn">Login</button>
+        <a id="clicktoSignup" href="./signup.php"> Don't have an account? Signup </a>
+        </div>
+        
+        </form>
+        </div>
 
 
-<script 
-    src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
-</script>
-</body>
+        <script 
+            src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous">
+        </script>
+    </body>
 </html>

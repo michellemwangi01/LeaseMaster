@@ -1,11 +1,22 @@
 <?php
+include("dbconnection.php");
+include("functions.php");
 
 if(!isset($_SESSION)) 
 { 
-    session_start(); 
-} 
-include("dbconnection.php");
-include("functions.php");
+  session_start(); 
+}
+if ($_SESSION['user_id'] == ''){
+  header("Location: login.php");
+}
+
+if($_SERVER['REQUEST_METHOD']== 'POST'){
+  session_unset();
+  session_destroy();
+  header("Location: login.php");
+}
+
+
 
 ?>
 
@@ -57,12 +68,15 @@ include("functions.php");
     <div class="navMainContainer collapse navbar-collapse navCustom" id="navbarNavAltMarkup">
       <div class="navbar-nav">
         <a class="nav-link active" aria-current="page" href="home.php">Home</a>
-        <a class="nav-link active" href="tenantRegistration.php">Application</a>
+        <a class="nav-link active" href="tenantApplication.php">Application</a>
         <a class="nav-link active" href="tenantServices.php">Tenant Services</a>
         <a class="nav-link active" href="tenants.php">Tenants</a>
       </div>
       <div class="navbar-nav">
-      <a class="nav-link active" href="login.php">Logout <?php echo $_SESSION['user_id'] ?></a>
+      <form action="login.php" method="POST">
+        <button class="nav-link active" type="submit">Logout <?php echo $_SESSION['user_id'] ?></button>
+      </form>
+      
       </div>
     </div>
   </div>
